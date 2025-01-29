@@ -1,3 +1,5 @@
+import java.awt.Color;
+
 
 public class Board {
     
@@ -6,7 +8,7 @@ public class Board {
 
     public Board(){
         Display.properties = properties;
-       /* properties[0][0] = new Property(new Color(0,225,0), "Go",  0);
+        properties[0][0] = new Property(new Color(0,225,0), "Go",  0);
         properties[0][1] = new Property(new Color(102,51,0), "Mediterranean Avenue", checking 60);
         properties[0][3] = new Property("Community Chest", checking 0);
         properties[0][2] = new Property(new Color(102,51,0), "Baltic", checking 60);
@@ -23,7 +25,7 @@ public class Board {
         properties[0][10] = new Property(new Color(204,68,204), "Virginia Avenue", checking 160);
         properties[0][3] = new Property("Pennsylvania Railroad", checking 200);
         properties[0][11] = new Property(new Color(204,68,204), "St. James Place", checking 180);
-*/
+
 
         // add properties 
     }
