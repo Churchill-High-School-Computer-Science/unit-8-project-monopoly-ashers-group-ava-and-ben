@@ -6,18 +6,18 @@ public class Property {
     Color color;
     String name;
     int cost;
-    String house;
+    int house;
     int parking;
-    String owner;
+    Boolean owner;
     int rent;
     Boolean jail;
     int mortgage;
     
     ///. constructors 
-    public Property(Color c, String n, int cost, String h, int p, String o, int r, Boolean j, int m){
+    public Property(Color c, String n, int co, int h, int p, Boolean o, int r, Boolean j, int m){
         color = c;
         name = n;
-        cost = cost;
+        cost = co;
         house = h;
         parking = p;
         owner = o;
@@ -36,17 +36,21 @@ public class Property {
     public String getName(){
         return name;
     }
+    
+    public int getCost(){
+        return cost;
+    }
 
     //TODO fix
     public int getNumHouses(){
-        return 0;
+        return house;
     }
     public int getParking(){
         return parking;
     }
 
     //TODO fix
-    public String getOwner(){
+    public boolean getOwner(){
         return owner;
     }
 
