@@ -11,7 +11,7 @@ public class Property {
     Boolean owner;
     int rent;
     Boolean jail;
-    int mortgage;
+    int mortgage; 
     
     ///. constructors 
     public Property(Color c, String n, int co, int h, int p, Boolean o, int r, Boolean j, int m){
@@ -43,7 +43,7 @@ public class Property {
 
     //TODO fix
     public int getNumHouses(){
-        return house;
+        return 0;
     }
     public int getParking(){
         return parking;

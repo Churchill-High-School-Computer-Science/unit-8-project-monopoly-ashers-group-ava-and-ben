@@ -196,6 +196,7 @@ public class Display extends JFrame {
         JOptionPane.showMessageDialog(frame, text);
     }
 
+    //Display.choice(put the title text and options array)
     public static int choice(String title, String text, String[] options){
         return JOptionPane.showOptionDialog(frame,
                                             text,
