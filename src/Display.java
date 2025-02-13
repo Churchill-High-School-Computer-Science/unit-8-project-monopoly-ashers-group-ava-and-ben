@@ -18,6 +18,9 @@ public class Display extends JFrame {
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
             Graphics2D g2d = (Graphics2D) g;
+            g.setColor(Color.BLACK);
+            g.drawRect(50,50,500,500);
+            diceDisplay.paint(g);
 
             // Draw the board background
             g2d.setColor(new Color(240, 230, 200));
@@ -208,7 +211,9 @@ public class Display extends JFrame {
                                             options[0]);
     }
 
+// use this for dice ???
     public static void setDiceDisplay(String text){
         diceDisplay.setText(text);
+        boardPanel.repaint();
     }
 }

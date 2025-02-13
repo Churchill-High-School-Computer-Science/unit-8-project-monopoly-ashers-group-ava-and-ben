@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 public class Player {
 
@@ -26,10 +27,14 @@ public class Player {
     /// idk how do this maybe
     int location;
     public int roll_dice(){
+
+        JOptionPane.showMessageDialog(null,"PRess to Roll");
         int dice1=(int)(Math.random()*6+1);
         int dice2=(int)(Math.random()*6+1);
         int dicesum = dice1 + dice2;
+        Display.setDiceDisplay("You rolled " + dicesum);
         return dicesum;
+        
     }
 
     public void playerMove(){
