@@ -15,7 +15,27 @@ public class Player {
     String name;
     int location;
     int money;
+    public boolean Jail = false;
+    private int turnsinjail = 0;
     
+    public void arrested(){
+        Jail = true;
+        turnsinjail = 0;
+        location = 10;
+    }
+    public void released(){
+        Jail = false;
+        turnsinjail = 0;
+    }
+    public int timeinjailyk(){
+        return turnsinjail;
+    }
+
+    public void addtothemturns(){
+        turnsinjail++;
+    }
+
+
     public String getName(){
         return name;
     }
@@ -44,9 +64,17 @@ public class Player {
         int dice1=(int)(Math.random()*6+1);
         int dice2=(int)(Math.random()*6+1);
         int dicesum = dice1 + dice2;
-        Display.setDiceDisplay("You rolled " + dicesum);
+        Display.setDiceDisplay("You rolled " + dice1 + " & " + dice2);
         return dicesum;
-        
+        if (dice1 == dice2){
+            location = (10 + dicesum) % 40;
+            released();
+            return true;
+        }
+            else{
+                addtothemturns();
+                return false;
+            }
     }
 
     public void playerMove(int moves){

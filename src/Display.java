@@ -188,6 +188,34 @@ public class Display extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (!players.isEmpty()){
                     Player currentPlayer = players.get(currentPlayerIndex);
+                    if (currentPlayer.Jail){
+                        currentPlayer.addtothemturns();
+                        int choice = JOptionPane.showConfirmDialog(frame,
+                        currentPlayer.getName() + " do you want to pay 50 dabloons to get out ??",
+                        "----------------",
+                        JOptionPane.YES_NO_OPTION);
+
+                        if (choice == JOptionPane.YES_NO_OPTION && currentPlayer.getMoney() >= 50){
+                            currentPlayer.money -= 50;
+                            Display.inform(currentPlayer.getName()+ " is out on bond :( )");
+                            currentPlayer.released();
+                        }
+                            else if (currentPlayer.timeinjailyk() == 3 ) {
+                                Display.inform(currentPlayer.getName()+ " is out of jail finally took ya long enough");
+                                currentPlayer.released();
+                        }
+                            else {
+                                Display.inform(currentPlayer.getName()+ "Free my boy fr");
+                                currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
+                                return;
+                            }
+                    }
+
+
+
+
+
+
                     int roll = currentPlayer.roll_dice();
                     int check = currentPlayer.location;
                     currentPlayer.roll_dice();
@@ -196,10 +224,21 @@ public class Display extends JFrame {
                     if (check + roll >= 40) {
                         currentPlayer.money += 200;
                     }
+                    if (currentPlayer.location == 10 && !currentPlayer.Jail){
+                        Display.inform(" Visit jail fr");
+                    }
+
+                    if (currentPlayer.location == 30){
+                        Display.inform(currentPlayer.getName() + " is getting arrested ");
+                        currentPlayer.arrested();
+                        Display.boardPanel.repaint();
+                        currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
+                        return;
+                    }
 
                     Property isProperty = Board.propertiesMap.get(currentPlayer.location);
                     
-                    if(isProperty != null && !isProperty.isOwned() && isProperty.getCost() > 0){
+                    if (isProperty != null && !isProperty.isOwned() && isProperty.getCost() > 0){
                         int choice = JOptionPane.showConfirmDialog(frame, currentPlayer.getName()+ " Do you want to buy" +isProperty.getName() + " for " + "Cost: " + isProperty.getCost(),
                         "Buy ???",
                         JOptionPane.YES_NO_OPTION);

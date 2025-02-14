@@ -41,7 +41,7 @@ public class Board {
         properties[0][9] = new Property(new Color(0, 153, 204), "Connecticut Avenue", 120, 50, 8, false, 8, false, 0);
         propertiesMap.put(9, properties[0][9]);
 
-        properties[0][10] = new Property(new Color(0, 0, 0), "Jail", 0, 0, 0, false, 0, false, 0);
+        properties[0][10] = new Property(new Color(0, 0, 0), "Go To Jail", 0, 0, 0, false, 0, false, 0);
         propertiesMap.put(10, properties[0][10]);
 
         properties[1][10] = new Property(new Color(204, 68, 204), "St. Charles Place", 140, 100, 10, false, 10, false, 0);
@@ -101,7 +101,7 @@ public class Board {
         properties[10][1] = new Property(new Color(255, 255, 51), "Marvin Gardens", 280, 150, 24, false, 24, false, 0);
         propertiesMap.put(29, properties[10][1]);
 
-        properties[10][0] = new Property(new Color(0, 0, 0), "Go to Jail", 0, 0, 0, false, 0, false, 0);
+        properties[10][0] = new Property(new Color(0, 0, 0), "Visit Jail", 0, 0, 0, false, 0, false, 0);
         propertiesMap.put(30, properties[10][0]);
 
         properties[9][0] = new Property(new Color(51, 153, 51), "Pacific Avenue", 300, 200, 26, false, 26, false, 0);
