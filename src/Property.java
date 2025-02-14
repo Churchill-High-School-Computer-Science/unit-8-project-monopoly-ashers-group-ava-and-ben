@@ -8,11 +8,26 @@ public class Property {
     int cost;
     int house;
     int parking;
-    Boolean owner;
+    Player owner;
     int rent;
     Boolean jail;
     int mortgage; 
     
+    //buying and stuff 
+    
+    public Player getOwner(){
+        return owner;
+    }
+    public void setOwner(Player propowner){
+        owner = propowner;
+    }
+    public boolean isOwned(){
+        return owner != null;
+    }
+
+
+
+
     ///. constructors 
     public Property(Color c, String n, int co, int h, int p, Boolean o, int r, Boolean j, int m){
         color = c;
@@ -20,7 +35,7 @@ public class Property {
         cost = co;
         house = h;
         parking = p;
-        owner = o;
+        owner = null;
         rent = r;
         jail = j;
         mortgage = m;
@@ -49,10 +64,7 @@ public class Property {
         return parking;
     }
 
-    //TODO fix
-    public boolean getOwner(){
-        return owner;
-    }
+
 
     //TODO fix
     public int getRent(){

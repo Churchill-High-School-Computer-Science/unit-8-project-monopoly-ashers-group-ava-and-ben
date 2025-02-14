@@ -12,15 +12,20 @@ public class Display extends JFrame {
     static JButton chance = new JButton("Chance");
     static JLabel diceDisplay = new JLabel();
     static JFrame frame = new JFrame("Monopoly Game");
-    static JPanel boardPanel = new JPanel() {
+    static int currentPlayerIndex = 0;
+    public static void addPlayer(Player player){
+        players.add(player);
+    }
+
     
+
+    static JPanel boardPanel = new JPanel() {
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
             Graphics2D g2d = (Graphics2D) g;
             g.setColor(Color.BLACK);
             g.drawRect(50,50,500,500);
-            diceDisplay.paint(g);
 
             // Draw the board background
             g2d.setColor(new Color(240, 230, 200));
@@ -51,7 +56,7 @@ public class Display extends JFrame {
             drawPlayerAssets(g2d);
             drawPlayers(g2d);
         }
-
+    
         public void drawPlayers(Graphics g2d){
             
             if(players != null && !players.isEmpty()){
@@ -96,6 +101,7 @@ public class Display extends JFrame {
                 }
             }
         }
+        
 
         private void drawProperty(Property p, Graphics2D g2d, int x, int y) {
 
@@ -154,12 +160,11 @@ public class Display extends JFrame {
     };
 
     public static void setupFrame() {
-
         frame.setSize(1000, 1000);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
-        frame.setLayout(null); // Allow manual positioning
-
+        frame.setLayout(null); 
+        
         // Configure buttons
         communityChest.setBackground(new Color(0, 100, 200));
         communityChest.setBounds(200, 200, 150, 50);
@@ -174,6 +179,50 @@ public class Display extends JFrame {
         diceDisplay.setBackground(new Color(255, 255, 255));
         diceDisplay.setText("No rolls yet!");
         frame.add(diceDisplay);
+
+        
+        JButton rollDiceButton = new JButton("Roll Dice");
+        rollDiceButton.setBounds(550, 300, 150, 50); // change ?
+        rollDiceButton.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!players.isEmpty()){
+                    Player currentPlayer = players.get(currentPlayerIndex);
+                    int roll = currentPlayer.roll_dice();
+                    int check = currentPlayer.location;
+                    currentPlayer.roll_dice();
+                    currentPlayer.location = (currentPlayer.location + roll) % 40;
+
+                    if (check + roll >= 40) {
+                        currentPlayer.money += 200;
+                    }
+
+                    Property isProperty = Board.propertiesMap.get(currentPlayer.location);
+                    
+                    if(isProperty != null && !isProperty.isOwned() && isProperty.getCost() > 0){
+                        int choice = JOptionPane.showConfirmDialog(frame, currentPlayer.getName()+ " Do you want to buy" +isProperty.getName() + " for " + "Cost: " + isProperty.getCost(),
+                        "Buy ???",
+                        JOptionPane.YES_NO_OPTION);
+                        
+                        if (choice == JOptionPane.YES_OPTION && currentPlayer.getMoney() >= isProperty.getCost()) {
+                            currentPlayer.money -= isProperty.getCost();
+                            isProperty.setOwner(currentPlayer);
+                            currentPlayer.getProperties().add(isProperty);
+                        }
+                        else if (choice == JOptionPane.YES_OPTION){
+                            Display.inform("NARRRR");
+                        }
+                    }
+                    Display.boardPanel.repaint();
+                    currentPlayerIndex = (currentPlayerIndex + 1) % players.size();
+                }
+            }
+        });
+        frame.add(rollDiceButton);
+
+
+    
+
 
         communityChest.addActionListener(new ActionListener() {
             @Override
@@ -193,7 +242,8 @@ public class Display extends JFrame {
         boardPanel.setBounds(50, 50, 900, 900);
         frame.add(boardPanel);
         frame.setVisible(true);
-    }
+    
+}
 
     public static void inform(String text){
         JOptionPane.showMessageDialog(frame, text);
@@ -216,4 +266,5 @@ public class Display extends JFrame {
         diceDisplay.setText(text);
         boardPanel.repaint();
     }
+    
 }

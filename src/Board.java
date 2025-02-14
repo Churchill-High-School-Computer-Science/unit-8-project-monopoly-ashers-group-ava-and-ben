@@ -5,7 +5,7 @@ import java.util.Map;
 public class Board {
    
     Property[][] properties = new Property[11][11];
-    Map<Integer, Property> propertiesMap = new HashMap<>();
+    static Map<Integer, Property> propertiesMap = new HashMap<>();
 
     public Board(){
         Display.properties = properties;

@@ -1,22 +1,36 @@
-
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
+
+
+
 public class Player {
 
-    //TODO FIX
+    public Player(String playerName) {
+        name = playerName;
+        location = 0;
+        money = 1500;
+    }
+
+    String name;
+    int location;
+    int money;
+    
     public String getName(){
-        return "no one";
+        return name;
     }
 
-    ///TODO FIX
+
     public int getMoney(){
-        return 1000;
+        return money;
     }
+
+
 
     //TODO FIX
+    private ArrayList<Property> properties = new ArrayList<>();
     public ArrayList<Property> getProperties(){
-        return null;
+        return properties;
     }
 
     //TODO FIX
@@ -24,10 +38,8 @@ public class Player {
     public int getLocation(){
         return location;
     }
-    /// idk how do this maybe
-    int location;
-    public int roll_dice(){
 
+    public int roll_dice(){
         JOptionPane.showMessageDialog(null,"PRess to Roll");
         int dice1=(int)(Math.random()*6+1);
         int dice2=(int)(Math.random()*6+1);
@@ -37,11 +49,8 @@ public class Player {
         
     }
 
-    public void playerMove(){
-        location = roll_dice() + location;
-        location = location % 40;
+    public void playerMove(int moves){
+        location = (roll_dice() + moves) % 4;
         Display.boardPanel.repaint();
     }
-
-
 }
