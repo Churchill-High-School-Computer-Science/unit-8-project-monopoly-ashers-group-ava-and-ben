@@ -65,16 +65,36 @@ public class Player {
         int dice2=(int)(Math.random()*6+1);
         int dicesum = dice1 + dice2;
         Display.setDiceDisplay("You rolled " + dice1 + " & " + dice2);
-        return dicesum;
-        if (dice1 == dice2){
-            location = (10 + dicesum) % 40;
-            released();
-            return true;
-        }
-            else{
-                addtothemturns();
-                return false;
+
+        if(Jail){
+            if (dice1 == dice2){
+                Display.setDiceDisplay("Snmake eyes");
+                location = (10 + dicesum) % 40;
+                released();
             }
+                else {
+                    addtothemturns();
+                    if(timeinjailyk() == 3){
+                        if(money >= 50)
+                        money -= 50;
+                        location = (10 + dicesum) % 40;
+                        released();
+                    }
+                    else {
+                        Display.inform(getName() + " Your out of the game");
+                        for (int i = 0; i < Display.players.size(); i ++){
+                            if (Display.players.get(i).getName().equals(name)){
+                                Display.players.remove(i);
+                                break;
+                            }
+                        }
+                    }
+                }
+        }
+
+
+
+        return dicesum;
     }
 
     public void playerMove(int moves){

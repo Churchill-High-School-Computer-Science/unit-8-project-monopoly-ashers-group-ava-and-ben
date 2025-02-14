@@ -188,6 +188,8 @@ public class Display extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (!players.isEmpty()){
                     Player currentPlayer = players.get(currentPlayerIndex);
+       
+
                     if (currentPlayer.Jail){
                         currentPlayer.addtothemturns();
                         int choice = JOptionPane.showConfirmDialog(frame,
